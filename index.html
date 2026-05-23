@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title></title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="header-actions">
+    <button class="btn" id="btnUpload"><i class="fas fa-folder-open"></i> <span class="btn-label">Upload</span></button>
+    <button class="btn" id="btnReset"><i class="fas fa-rotate-left"></i> <span class="btn-label">Reset</span></button>
+    <button class="btn btn-primary" id="btnExport"><i class="fas fa-download"></i> <span class="btn-label">Export</span></button>
+  </div>
+</header>
+
+<main>
+   
+  <div class="preview-area" id="previewArea">
+
+    <div class="placeholder-box" id="placeholderBox">
+      <span>Drop image here or click to upload</span>
+    </div>
+
+    <input type="file" id="fileInput" accept="image/*" style="display:none">
+
+     
+    <div class="canvas-wrap" id="canvasWrap">
+      <canvas id="mainCanvas"></canvas>
+      <div class="compare-overlay" id="compareOverlay">
+        <div class="compare-line" id="compareLine"></div>
+        <div class="compare-handle" id="compareHandle"><i class="fas fa-arrows-left-right"></i></div>
+      </div>
+      <div class="label-tag label-before">Before</div>
+      <div class="label-tag label-after">After</div>
+    </div>
+
+     
+    <div class="preview-bar" id="previewBar" style="display:none">
+      <button class="btn" id="btnZOut"><i class="fas fa-minus"></i></button>
+      <span class="zoom-label" id="zoomLabel">100%</span>
+      <button class="btn" id="btnZIn"><i class="fas fa-plus"></i></button>    
+      <button class="btn" id="btnCompare"><i class="fas fa-columns"></i> Compare</button>
+    </div>
+  </div>
+
+   
+  <div class="controls" id="controlsPanel">
+
+     
+    <div class="sec">
+      <div class="sec-head" data-sec="presets">
+        <div class="sec-title">Presets</div>
+        <i class="fas fa-chevron-down chevron" data-chev="presets"></i>
+      </div>
+      <div class="sec-body" data-sec="presets">
+        <div class="preset-grid">
+          <button class="preset-btn on" data-preset="natural">Natural</button>
+          <button class="preset-btn" data-preset="film">Film</button>
+          <button class="preset-btn" data-preset="soft">Soft Warm</button>
+          <button class="preset-btn" data-preset="studio">Studio</button>
+        </div>
+        <div style="font-size:11px;color:var(--muted);">
+          <i class="fas fa-circle-info" style="margin-right:3px;"></i>
+        Make sure to use images with higher dimensions to make it bigger in the canvas (to be improved).
+        </div>
+      </div>
+    </div>
+
+     
+    <div class="sec">
+      <div class="sec-head" data-sec="color">
+        <div class="sec-title">Color & Tone</div>
+        <i class="fas fa-chevron-down chevron" data-chev="color"></i>
+      </div>
+      <div class="sec-body" data-sec="color">
+        <div class="sld">
+          <label>Temperature <span class="v" id="vTemp">15</span></label>
+          <input type="range" id="sTemp" min="-50" max="50" value="15">
+        </div>
+        <div class="sld">
+          <label>Tint <span class="v" id="vTint">5</span></label>
+          <input type="range" id="sTint" min="-50" max="50" value="5">
+        </div>
+        <div class="sld">
+          <label>Saturation <span class="v" id="vSat">-8</span></label>
+          <input type="range" id="sSat" min="-50" max="50" value="-8">
+        </div>
+        <div class="sld">
+          <label>Vibrance <span class="v" id="vVib">10</span></label>
+          <input type="range" id="sVib" min="-50" max="50" value="10">
+        </div>
+      </div>
+    </div>
+
+     
+    <div class="sec">
+      <div class="sec-head" data-sec="light">
+        <div class="sec-title">Light & Shadow</div>
+        <i class="fas fa-chevron-down chevron" data-chev="light"></i>
+      </div>
+      <div class="sec-body" data-sec="light">
+        <div class="sld">
+          <label>Exposure <span class="v" id="vExp">5</span></label>
+          <input type="range" id="sExp" min="-50" max="50" value="5">
+        </div>
+        <div class="sld">
+          <label>Contrast <span class="v" id="vCon">-10</span></label>
+          <input type="range" id="sCon" min="-50" max="50" value="-10">
+        </div>
+        <div class="sld">
+          <label>Highlights <span class="v" id="vHi">-15</span></label>
+          <input type="range" id="sHi" min="-50" max="50" value="-15">
+        </div>
+        <div class="sld">
+          <label>Shadows <span class="v" id="vSh">20</span></label>
+          <input type="range" id="sSh" min="-50" max="50" value="20">
+        </div>
+        <div class="sld">
+          <label>Vignette <span class="v" id="vVig">20</span></label>
+          <input type="range" id="sVig" min="0" max="80" value="20">
+        </div>
+      </div>
+    </div>
+
+     
+    <div class="sec">
+      <div class="sec-head" data-sec="texture">
+        <div class="sec-title">Texture & Detail</div>
+        <i class="fas fa-chevron-down chevron" data-chev="texture"></i>
+      </div>
+      <div class="sec-body" data-sec="texture">
+        <div class="sld">
+          <label>Film Grain <span class="v" id="vGrain">12</span></label>
+          <input type="range" id="sGrain" min="0" max="60" value="12">
+        </div>
+        <div class="sld">
+          <label>Sharpness <span class="v" id="vSharp">8</span></label>
+          <input type="range" id="sSharp" min="-30" max="50" value="8">
+        </div>
+        <div class="sld">
+          <label>Skin Soften <span class="v" id="vSkin">10</span></label>
+          <input type="range" id="sSkin" min="0" max="40" value="10">
+        </div>
+      </div>
+    </div>
+
+     
+    <div class="sec">
+      <div class="sec-head" data-sec="bg">
+        <div class="sec-title"><i class="fas fa-image" style="font-size:12px;color:var(--accent);"></i> Background</div>
+        <i class="fas fa-chevron-down chevron" data-chev="bg"></i>
+      </div>
+      <div class="sec-body" data-sec="bg">
+        <div class="sld">
+          <label>Background Blur <span class="v" id="vBgBlur">0</span></label>
+          <input type="range" id="sBgBlur" min="0" max="30" value="0">
+        </div>
+        <div class="sld">
+          <label>Background Brightness <span class="v" id="vBgBright">0</span></label>
+          <input type="range" id="sBgBright" min="-30" max="30" value="0">
+        </div>
+        <div style="font-size:11px;color:var(--muted);">
+          <i class="fas fa-circle-info" style="margin-right:3px;"></i>
+          Background processing uses edge detection, results vary per image.
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-credit">
+        <div>Made with ❤️. By Kim.</div>
+        <div><a href="https://github.com/KimRebamba"><i class="fa-brands fa-github" style="color: rgb(255, 255, 255);"></i></a></div>
+    </div>    
+  </div>
+</main>
+
+<div class="toast-box" id="toastBox"></div>
+
+<script defer src="editor.js"></script>
+</body>
+</html>
