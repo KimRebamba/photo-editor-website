@@ -25,8 +25,7 @@ var S = {
   p: {
     temp: 15, tint: 5, sat: -8, vib: 10,
     exp: 5, con: -10, hi: -15, sh: 20, vig: 20,
-    grain: 12, sharp: 8, skin: 10,
-    bgBlur: 0, bgBright: 0
+    grain: 12, sharp: 8, skin: 10
   }
 };
 
@@ -52,9 +51,7 @@ var sliders = {
   sVig:     { key: 'vig',     vid: 'vVig' },
   sGrain:   { key: 'grain',   vid: 'vGrain' },
   sSharp:   { key: 'sharp',   vid: 'vSharp' },
-  sSkin:    { key: 'skin',    vid: 'vSkin' },
-  sBgBlur:  { key: 'bgBlur',  vid: 'vBgBlur' },
-  sBgBright:{ key: 'bgBright',vid: 'vBgBright' }
+  sSkin:    { key: 'skin',    vid: 'vSkin' }
 };
 
 Object.keys(sliders).forEach(function(id) {
@@ -70,10 +67,10 @@ Object.keys(sliders).forEach(function(id) {
 
 //  presets 
 var presets = {
-  natural: { temp:15, tint:5, sat:-8, vib:10, exp:5, con:-10, hi:-15, sh:20, vig:20, grain:12, sharp:8, skin:10, bgBlur:0, bgBright:0 },
-  film:    { temp:22, tint:8, sat:-18, vib:5, exp:-2, con:5, hi:-20, sh:15, vig:40, grain:30, sharp:-5, skin:5, bgBlur:0, bgBright:-5 },
-  soft:    { temp:30, tint:10, sat:-5, vib:15, exp:8, con:-18, hi:-10, sh:25, vig:15, grain:5, sharp:-10, skin:20, bgBlur:0, bgBright:5 },
-  studio:  { temp:5, tint:0, sat:-3, vib:8, exp:3, con:8, hi:-25, sh:15, vig:10, grain:3, sharp:20, skin:8, bgBlur:5, bgBright:-10 }
+  natural: { temp:15, tint:5, sat:-8, vib:10, exp:5, con:-10, hi:-15, sh:20, vig:20, grain:12, sharp:8, skin:10 },
+  film:    { temp:22, tint:8, sat:-18, vib:5, exp:-2, con:5, hi:-20, sh:15, vig:40, grain:30, sharp:-5, skin:5 },
+  soft:    { temp:30, tint:10, sat:-5, vib:15, exp:8, con:-18, hi:-10, sh:25, vig:15, grain:5, sharp:-10, skin:20 },
+  studio:  { temp:5, tint:0, sat:-3, vib:8, exp:3, con:8, hi:-25, sh:15, vig:10, grain:3, sharp:20, skin:8 }
 };
 
 document.querySelectorAll('.preset-btn').forEach(function(btn) {
@@ -81,7 +78,7 @@ document.querySelectorAll('.preset-btn').forEach(function(btn) {
     document.querySelectorAll('.preset-btn').forEach(function(b) { b.classList.remove('on'); });
     btn.classList.add('on');
     applyPreset(presets[btn.dataset.preset]);
-    toast('Applied "' + btn.textContent + '" preset', 'fa-wand-magic-sparkles', '#d4843c');
+    toast('Applied "' + btn.textContent + '" preset', 'fa-wand-magic-sparkles', '#ffffff');
   });
 });
 
@@ -372,7 +369,7 @@ function drawCompare() {
       }
       ctx.putImageData(mixed, 0, 0);
 
-      ctx.fillStyle = 'rgba(212,132,60,0.85)';
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.89)';
       ctx.fillRect(splitX - 1, 0, 2, h);
     }
   }

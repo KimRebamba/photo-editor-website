@@ -6,8 +6,8 @@
     --border: #2c2e36;
     --fg: #e4e5ea;
     --muted: #7f828e;
-    --accent: #d4843c;
-    --accent-glow: rgba(212,132,60,0.2);
+    --accent: #d7d7d7;
+    --accent-glow: rgba(150, 150, 150, 0.188);
   }
 
   * { margin:0; padding:0; box-sizing:border-box; }
@@ -69,12 +69,12 @@
   .btn:active { transform: scale(0.97); }
 
   .btn-primary {
-    background: var(--accent);
+    background: rgba(212,132,60,0.12);
     border: none;
     color: #fff;
     font-weight: 600;
   }
-  .btn-primary:hover { background: #e09050; }
+  .btn-primary:hover { background: rgba(255, 213, 175, 0.12); }
 
 
   main {
@@ -175,7 +175,7 @@
     backdrop-filter: blur(6px);
   }
   .label-before { left: 10px; background: rgba(0,0,0,0.55); color: #999; }
-  .label-after  { right: 10px; background: rgba(212,132,60,0.2); color: var(--accent); border: 1px solid rgba(212,132,60,0.25); }
+  .label-after  { right: 10px;  background: rgba(0,0,0,0.55); color: var(--accent); border: 1px solid rgba(0,0,0,0.55); }
 
 
   .preview-bar {
@@ -329,7 +329,7 @@
     border-radius: 8px;
     background: var(--card);
     border: 1px solid var(--border);
-    color: var(--fg);
+    color: #fff;
     font-size: 12px;
     box-shadow: 0 6px 24px rgba(0,0,0,0.4);
     display: flex;
@@ -356,6 +356,7 @@
       border-left: none;
       border-top: 1px solid var(--border);
       max-height: 55vh;
+      padding-right: 72px;
     }
     #mainCanvas {
       max-height: 40vh;
@@ -371,7 +372,7 @@
 
   @media (max-width: 480px) {
     header { padding: 10px 12px; }
-    .controls { padding: 12px; }
+    .controls { padding: 12px 56px 12px 12px; }
     .sec-body { padding: 0 10px 10px; }
     .sec-head { padding: 10px; }
     .preset-grid { grid-template-columns: 1fr 1fr; }
